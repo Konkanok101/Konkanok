@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor with Run Button</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .editor-container {
+            width: 50%;
+            border-right: 2px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            background-color: #fff;
+        }
+
+        .run-button, .back-button {
+            background-color: #04AA6D;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        .run-button {
+            background-color: #04AA6D;
+        }
+
+        .back-button {
+            background-color: #2196F3;
+        }
+
+        .output-container {
+            width: 50%;
+            background-color: #000;
+            color: white;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            overflow: auto;
+        }
+
+        .output-container pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Editor Section -->
+    <div class="editor-container">
+        <textarea id="codeInput" placeholder="Type your code here...">
+#include &lt;stdio.h&gt;
+
+
+        </textarea>
+        <div class="buttons-container">
+            <button class="run-button" onclick="runCode()">Run</button>
+            <button class="back-button" onclick="goBack()">Back to Lesson</button>
+        </div>
+    </div>
+
+    <!-- Output Section -->
+    <div class="output-container" id="output">
+        <pre id="outputText">Output will be displayed here...</pre>
+    </div>
+
+    <script>
+        function runCode() {
+            const outputElement = document.getElementById('outputText');
+            const code = document.getElementById('codeInput').value;
+
+            // การจับคำสั่ง printf จากโค้ดที่พิมพ์มา
+            const regex = /printf\("([^"]*)"\);/g;
+            let match;
+            let output = "";
+
+            // หาคำสั่ง printf ทั้งหมดในโค้ด
+            while ((match = regex.exec(code)) !== null) {
+                output += match[1] + '\n'; // ค่าที่อยู่ภายในเครื่องหมาย "
+            }
+
+            if (output) {
+                outputElement.textContent = output;
+            } else {
+                outputElement.textContent = "Error: No valid printf statement found.";
+            }
+        }
+
+        function goBack() {
+            window.location.href = "lesson.html"; // เปลี่ยน URL ตามที่ต้องการ
+        }
+    </script>
+</body>
+</html>

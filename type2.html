@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor with Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .editor-container {
+            width: 50%;
+            border-right: 2px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            background-color: #fff;
+        }
+
+        .run-button, .back-button {
+            background-color: #04AA6D;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        .run-button {
+            background-color: #04AA6D;
+        }
+
+        .back-button {
+            background-color: #2196F3;
+        }
+
+        .output-container {
+            width: 50%;
+            background-color: #000;
+            color: white;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            overflow: auto;
+        }
+
+        .output-container pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Editor Section -->
+    <div class="editor-container">
+        <textarea id="codeInput" placeholder="Type your code here...">
+Enter grade score here...
+        </textarea>
+        <div class="buttons-container">
+            <button class="run-button" onclick="runCode()">Run</button>
+            <button class="back-button" onclick="goBack()">Back to Lesson</button>
+        </div>
+    </div>
+    <div class="ace_content" style="top: -6px; left: 0px; width: 896px; height: 488px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 708px; visibility: visible;"></div></div>
+    <div class="ace_layer ace_marker-layer"><div class="ace_active-line" style="height: 18px; top: 396px; left: 0px; right: 0px;"></div></div><div class="ace_layer ace_text-layer" style="height: 1e+06px; margin: 0px 4px; top: -54px; left: 0px;"><div class="ace_line" style="height: 18px; top: 54px;"><span class="ace_comment ace_doc">GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,</span></div><div class="ace_line" style="height: 18px; top: 72px;"><span class="ace_comment ace_doc">C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.</span></div><div class="ace_line" style="height: 18px; top: 90px;"><span class="ace_comment ace_doc">Code, Compile, Run and Debug online from anywhere in world.</span></div><div class="ace_line" style="height: 18px; top: 108px;"></div><div class="ace_line" style="height: 18px; top: 126px;"><span class="ace_comment ace_doc">*******************************************************************************/</span></div><div class="ace_line" style="height: 18px; top: 144px;"><span class="ace_keyword">#include</span><span class="ace_constant ace_other"> &lt;stdio.h&gt;</span></div><div class="ace_line" style="height: 18px; top: 162px;"></div><div class="ace_line" style="height: 18px; top: 180px;"><span class="ace_storage ace_type">int</span> <span class="ace_identifier">main</span><span class="ace_paren ace_lparen">(</span><span class="ace_paren ace_rparen">)</span> <span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height: 18px; top: 198px;">    <span class="ace_storage ace_type">int</span> <span class="ace_identifier">grade</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height: 18px; top: 216px;"></div><div class="ace_line" style="height: 18px; top: 234px;">    <span class="ace_comment">// รับค่าเกรดจากผู้ใช้</span></div><div class="ace_line" style="height: 18px; top: 252px;">    <span class="ace_support ace_function ace_C99 ace_c">printf</span><span class="ace_paren ace_lparen">(</span><span class="ace_string ace_start">"</span><span class="ace_string">กรุณาป้อนเกรด (0 - 100): </span><span class="ace_string ace_end">"</span><span class="ace_paren ace_rparen">)</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height: 18px; top: 270px;">    <span class="ace_support ace_function ace_C99 ace_c">scanf</span><span class="ace_paren ace_lparen">(</span><span class="ace_string ace_start">"</span><span class="ace_constant ace_language ace_escape">%d</span><span class="ace_string ace_end">"</span><span class="ace_punctuation ace_operator">,</span> <span class="ace_keyword ace_operator">&amp;</span><span class="ace_identifier">grade</span><span class="ace_paren ace_rparen">)</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height: 18px; top: 288px;"></div><div class="ace_line" style="height: 18px; top: 306px;">    <span class="ace_comment">// ตรวจสอบช่วงเกรดและแสดงผล</span></div><div class="ace_line" style="height: 18px; top: 324px;">    <span class="ace_keyword ace_control">if</span> <span class="ace_paren ace_lparen">(</span><span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&gt;=</span> <span class="ace_constant ace_numeric">80</span> <span class="ace_keyword ace_operator">&amp;&amp;</span> <span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&lt;=</span> <span class="ace_constant ace_numeric">100</span><span class="ace_paren ace_rparen">)</span> <span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height: 18px; top: 342px;"><span class="ace_indent-guide">    </span>    <span class="ace_support ace_function ace_C99 ace_c">printf</span><span class="ace_paren ace_lparen">(</span><span class="ace_string ace_start">"</span><span class="ace_string">เกรดของคุณคือ A</span><span class="ace_constant ace_language ace_escape">\n</span><span class="ace_string ace_end">"</span><span class="ace_paren ace_rparen">)</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height: 18px; top: 360px;">    <span class="ace_paren ace_rparen">}</span> <span class="ace_keyword ace_control">else</span> <span class="ace_keyword ace_control">if</span> <span class="ace_paren ace_lparen">(</span><span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&gt;=</span> <span class="ace_constant ace_numeric">70</span> <span class="ace_keyword ace_operator">&amp;&amp;</span> <span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&lt;</span> <span class="ace_constant ace_numeric">80</span><span class="ace_paren ace_rparen">)</span> <span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height: 18px; top: 378px;"><span class="ace_indent-guide">    </span>    <span class="ace_support ace_function ace_C99 ace_c">printf</span><span class="ace_paren ace_lparen">(</span><span class="ace_string ace_start">"</span><span class="ace_string">เกรดของคุณคือ B</span><span class="ace_constant ace_language ace_escape">\n</span><span class="ace_string ace_end">"</span><span class="ace_paren ace_rparen">)</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height: 18px; top: 396px;">    <span class="ace_paren ace_rparen">}</span> <span class="ace_keyword ace_control">else</span> <span class="ace_keyword ace_control">if</span> <span class="ace_paren ace_lparen">(</span><span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&gt;=</span> <span class="ace_constant ace_numeric">60</span> <span class="ace_keyword ace_operator">&amp;&amp;</span> <span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&lt;</span> <span class="ace_constant ace_numeric">70</span><span class="ace_paren ace_rparen">)</span> <span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height: 18px; top: 414px;"><span class="ace_indent-guide">    </span>    <span class="ace_support ace_function ace_C99 ace_c">printf</span><span class="ace_paren ace_lparen">(</span><span class="ace_string ace_start">"</span><span class="ace_string">เกรดของคุณคือ C</span><span class="ace_constant ace_language ace_escape">\n</span><span class="ace_string ace_end">"</span><span class="ace_paren ace_rparen">)</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height: 18px; top: 432px;">    <span class="ace_paren ace_rparen">}</span> <span class="ace_keyword ace_control">else</span> <span class="ace_keyword ace_control">if</span> <span class="ace_paren ace_lparen">(</span><span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&gt;=</span> <span class="ace_constant ace_numeric">50</span> <span class="ace_keyword ace_operator">&amp;&amp;</span> <span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&lt;</span> <span class="ace_constant ace_numeric">60</span><span class="ace_paren ace_rparen">)</span> <span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height: 18px; top: 450px;"><span class="ace_indent-guide">    </span>    <span class="ace_support ace_function ace_C99 ace_c">printf</span><span class="ace_paren ace_lparen">(</span><span class="ace_string ace_start">"</span><span class="ace_string">เกรดของคุณคือ D</span><span class="ace_constant ace_language ace_escape">\n</span><span class="ace_string ace_end">"</span><span class="ace_paren ace_rparen">)</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height: 18px; top: 468px;">    <span class="ace_paren ace_rparen">}</span> <span class="ace_keyword ace_control">else</span> <span class="ace_keyword ace_control">if</span> <span class="ace_paren ace_lparen">(</span><span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&gt;=</span> <span class="ace_constant ace_numeric">0</span> <span class="ace_keyword ace_operator">&amp;&amp;</span> <span class="ace_identifier">grade</span> <span class="ace_keyword ace_operator">&lt;</span> <span class="ace_constant ace_numeric">50</span><span class="ace_paren ace_rparen">)</span> <span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height: 18px; top: 486px;"><span class="ace_indent-guide">    </span>    <span class="ace_support ace_function ace_C99 ace_c">printf</span><span class="ace_paren ace_lparen">(</span><span class="ace_string ace_start">"</span><span class="ace_string">เกรดของคุณคือ F</span><span class="ace_constant ace_language ace_escape">\n</span><span class="ace_string ace_end">"</span><span class="ace_paren ace_rparen">)</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height: 18px; top: 504px;">    <span class="ace_paren ace_rparen">}</span> <span class="ace_keyword ace_control">else</span> <span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height: 18px; top: 522px;"><span class="ace_indent-guide">    </span>    <span class="ace_support ace_function ace_C99 ace_c">printf</span><span class="ace_paren ace_lparen">(</span><span class="ace_string ace_start">"</span><span class="ace_string">เกรดไม่ถูกต้อง กรุณาป้อนค่าในช่วง 0 - 100</span><span class="ace_constant ace_language ace_escape">\n</span><span class="ace_string ace_end">"</span><span class="ace_paren ace_rparen">)</span><span class="ace_punctuation ace_operator">;</span></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor" style="display: block; top: 396px; left: 321px; width: 9px; height: 18px; animation-duration: 1000ms;"></div></div></div>
+    
+    <!-- Output Section -->
+    <!-- <div class="output-container" id="output">
+        <pre id="outputText">Output will be displayed here...</pre>
+    </div>
+    
+
+    <script>
+        function runCode() {
+            const outputElement = document.getElementById('outputText');
+            const code = document.getElementById('codeInput').value.trim();
+
+            // ตรวจจับค่าเกรดจากโค้ดที่พิมพ์
+            const regex = /^(\d+)$/;
+            const match = regex.exec(code);
+            
+            if (match) {
+                const score = parseInt(match[1]);
+                let grade;
+
+                if (score >= 80) grade = 'A';
+                else if (score >= 70) grade = 'B';
+                else if (score >= 60) grade = 'C';
+                else grade = 'F';
+
+                outputElement.textContent = `Score: ${score}\nGrade: ${grade}`;
+            } else {
+                outputElement.textContent = "Error: Please enter a valid numeric score.";
+            }
+        }
+
+        function goBack() {
+            window.location.href = "lesson.html"; // เปลี่ยน URL ตามที่ต้องการ
+        }
+    </script> -->
+</body>
+</html>
