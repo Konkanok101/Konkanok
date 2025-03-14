@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เรียนรู้ภาษาซีเบื้องต้น</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #e3f2fd, #bbdefb, #90caf9);
+            color: #0d47a1;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(3, 137, 209, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: #1976d2;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.5em;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .hamburger-menu div {
+            width: 30px;
+            height: 4px;
+            background: #0d47a1;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px; /* ความกว้างของเมนู */
+            height: 55%; /* ให้มีความสูงเต็มจอ */
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 999;
+            transform: translateX(-100%); /* เมนูถูกซ่อนไว้ทางซ้าย */
+            transition: transform 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .menu-overlay.active {
+            transform: translateX(0); /* เมื่อเมนูเปิด จะเลื่อนเข้ามา */
+        }
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* จัดเรียงตัวเลือกเมนูไปทางซ้าย */
+            padding: 20px;
+            margin-top: 20px; /* ลดระยะห่างระหว่างเมนู */
+        }
+
+        .menu-links a {
+            color: #0d47a1;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .menu-links a:hover {
+            color: #1976d2;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 1000px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1565c0;
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        p, ul, code {
+            margin: 10px 0;
+            color: #1a237e;
+            font-size: 1.2em;
+        }
+
+        code {
+            background: #e3f2fd;
+            display: block;
+            padding: 10px;
+            border-left: 4px solid #2196f3;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2196f3;
+            color: #ffffff;
+            position: relative;
+            margin-top: 40px;
+        }
+         /* Snowflake animation */
+         .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: snowflakes 10s linear infinite;
+        }
+
+        @keyframes snowflakes {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Generate random snowflakes */
+        .snowflake:nth-child(odd) {
+            animation-duration: 12s;
+        }
+
+        .snowflake:nth-child(even) {
+            animation-duration: 15s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1 style="color: #ffffff;">เรียนรู้ภาษาซี (C Programming)</h1>
+        <p style="color: #ffffff;">คำสั่งวนซ้ำ: while loop</p>
+    </header>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menu">
+        <div class="menu-links">
+            <a href="index.html">หน้าแรก</a>
+            <a href="mainc.html">ความหมายของ While Loop</a>
+            <a href="lesson.html">การทำงานของลูป While</a>
+            <a href="lesson2.html">บทเรียนที่ 2 </a>
+            <a href="contactc.html">ติดต่อเรา</a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+        <section id="intro">
+            <h2>ความหมาย: คำสั่งวนซ้ำ while loop</h2>
+            <p>คำสั่ง <code>while</code> ในภาษา C ใช้สำหรับวนซ้ำการทำงานของชุดคำสั่ง เมื่อเงื่อนไขที่กำหนดยังคงเป็นจริง (true) 
+            โดยรูปแบบของคำสั่งมีดังนี้:</p>
+            <code>
+while (เงื่อนไข) {
+    // ชุดคำสั่งที่ต้องการให้วนซ้ำ
+}
+            </code>
+        </section>
+
+        <section id="syntax">
+            <h2>ตัวอย่างการใช้งาน while loop</h2>
+            <code>
+#include &lt;stdio.h&gt;
+
+int main() { <br>
+    &nbsp;&nbsp;&nbsp;    int i = 1; // กำหนดตัวแปรเริ่มต้น <br>
+    &nbsp;&nbsp;&nbsp;    while (i <= 5) { // เงื่อนไข: วนซ้ำจนกว่า i จะมากกว่า 5 <br>
+        &nbsp;&nbsp;&nbsp;        printf("รอบที่ %d\n", i); // แสดงค่าปัจจุบันของ i <br>
+        &nbsp;&nbsp;&nbsp;        i++; // เพิ่มค่าของ i ครั้งละ 1 <br>
+    } <br>
+    &nbsp;&nbsp;&nbsp;    return 0; <br>
+    &nbsp;&nbsp;}
+            </code>
+        </section>
+
+        <section id="example">
+            <h2>ตัวอย่างโปรแกรม: รับค่าจากผู้ใช้จนกว่าจะป้อนเลข 0</h2>
+            <code>
+#include &lt;stdio.h&gt; <br>
+
+int main() { <br>
+    &nbsp;&nbsp;&nbsp;    int num; <br>
+    &nbsp;&nbsp;&nbsp;    printf("ป้อนตัวเลข (0 เพื่อออกจากโปรแกรม): "); <br>
+    &nbsp;&nbsp;&nbsp;    scanf("%d", &num); <br>
+    <br>
+    &nbsp;&nbsp;&nbsp;    while (num != 0) { // วนซ้ำจนกว่าผู้ใช้จะป้อน 0 <br>
+        &nbsp;&nbsp;&nbsp;        printf("คุณป้อนเลข: %d\n", num); <br>
+        &nbsp;&nbsp;&nbsp;        printf("ป้อนตัวเลขอีกครั้ง (0 เพื่อออก): "); <br>
+        &nbsp;&nbsp;&nbsp;        scanf("%d", &num); <br>
+    } <br>
+
+    &nbsp;&nbsp;&nbsp;    printf("โปรแกรมจบการทำงาน\n"); <br>
+    &nbsp;&nbsp;&nbsp;    return 0; <br>
+}
+            </code>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>เว็บไซต์นี้จัดทำเพื่อการศึกษา &copy; 2024</p>
+    </footer>
+     <!-- Script for Hamburger Menu -->
+     <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+        // Snowfall Effect
+        const snowContainer = document.createElement('div');
+        document.body.appendChild(snowContainer);
+
+        for (let i = 0; i < 50; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;  // Random duration
+            snowflake.textContent = '❄';
+            snowContainer.appendChild(snowflake);
+        }
+    </script>
+</body>
+</html>

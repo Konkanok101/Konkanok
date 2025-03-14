@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทเรียน: while loop ในภาษา C</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #e3f2fd, #bbdefb, #90caf9);
+            color: #0d47a1;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(3, 137, 209, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: #1976d2;
+        }
+
+        header p {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .hamburger-menu div {
+            width: 30px;
+            height: 4px;
+            background: #0d47a1;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px; /* ความกว้างของเมนู */
+            height: 55%; /* ให้มีความสูงเต็มจอ */
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 999;
+            transform: translateX(-100%); /* เมนูถูกซ่อนไว้ทางซ้าย */
+            transition: transform 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .menu-overlay.active {
+            transform: translateX(0); /* เมื่อเมนูเปิด จะเลื่อนเข้ามา */
+        }
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* จัดเรียงตัวเลือกเมนูไปทางซ้าย */
+            padding: 20px;
+            margin-top: 20px; /* ลดระยะห่างระหว่างเมนู */
+        }
+
+        .menu-links a {
+            color: #0d47a1;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .menu-links a:hover {
+            color: #1976d2;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 1000px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+
+        pre {
+            background-color: #e6f7ff;
+            border: 1px solid #cce7ff;
+            padding: 10px;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+
+        p, ul, code {
+            margin: 10px 0;
+            color: #1a237e;
+            font-size: 1.2em;
+        }
+
+        .button {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #004ba0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2196f3;
+            color: white;
+            margin-top: 40px;
+        }
+         /* Snowflake animation */
+         .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: snowflakes 10s linear infinite;
+        }
+
+        @keyframes snowflakes {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Generate random snowflakes */
+        .snowflake:nth-child(odd) {
+            animation-duration: 12s;
+        }
+
+        .snowflake:nth-child(even) {
+            animation-duration: 15s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1 style="color: #ffffff;">บทเรียน: while loop ในภาษา C</h1>
+        <p style="color: #ffffff;">เรียนรู้การใช้ while loop ในภาษา C</p>
+    </header>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menu">
+        <div class="menu-links">
+            <a href="index.html">หน้าแรก</a>
+            <a href="mainc.html">ความหมายของ While Loop</a>
+            <a href="lesson.html">การทำงานของลูป While</a>
+            <a href="lesson2.html">บทเรียนที่ 2 </a>
+            <a href="contactc.html">ติดต่อเรา</a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+        <section>
+            <h2>การใช้ while loop ในภาษา C</h2>
+            <p>ในบทนี้เราจะเรียนรู้การใช้ `while loop` ซึ่งเป็นลูปที่ใช้ในการทำซ้ำชุดคำสั่งไปเรื่อยๆ จนกว่าจะมีเงื่อนไขที่ไม่เป็นจริง</p>
+
+            <h3>ตัวอย่างโปรแกรมที่ใช้ while loop</h3>
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int i = 1;
+
+    // ใช้ while loop เพื่อแสดงผลจาก 1 ถึง 5
+    while (i <= 5) {
+        printf("%d\n", i);
+        i++;  // เพิ่มค่า i ทุกครั้ง
+    }
+
+    return 0;
+}
+            </pre>
+            <p>โปรแกรมนี้จะแสดงผลลัพธ์เป็นตัวเลขจาก 1 ถึง 5 โดยใช้ `while loop` เพื่อทำซ้ำคำสั่งการพิมพ์ตัวเลข</p>
+ <div class="container">
+                <section>
+
+                    <h3>ตัวอย่างโปรแกรมที่ใช้ while loop</h3>
+                    <pre>
+    #include <stdio.h>
+        int main() {
+            int n = 1;
+            while (n <= 10) {
+            printf("%d\n", n);
+            n++;
+            }
+            printf("Loop ended\n", n);
+            return 0;
+            }
+ </div>
+            <h3>ข้อควรระวังในการใช้ while loop</h3>
+            <p>ควรระมัดระวังการตั้งเงื่อนไขใน `while loop` ให้ดี หากเงื่อนไขไม่มีการเปลี่ยนแปลงภายในลูป อาจทำให้โปรแกรมเข้าสู่ลูปไม่มีที่สิ้นสุด (infinite loop)</p>
+
+            <h3>แบบฝึกหัด</h3>
+            <ol>
+                <li>เขียนโปรแกรมใช้ `while loop` เพื่อแสดงผลตัวเลขคู่จาก 2 ถึง 20</li>
+                <li>เขียนโปรแกรมใช้ `while loop` เพื่อหาผลรวมของตัวเลขตั้งแต่ 1 ถึง 100</li>
+            </ol>
+
+            <a href="https://www.programiz.com/c-programming/online-compiler/" class="button">Try it Yourself »</a>
+        </section>
+    </div>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+        // Snowfall Effect
+        const snowContainer = document.createElement('div');
+        document.body.appendChild(snowContainer);
+
+        for (let i = 0; i < 50; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;  // Random duration
+            snowflake.textContent = '❄';
+            snowContainer.appendChild(snowflake);
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <p>เว็บไซต์นี้จัดทำเพื่อการศึกษา &copy; 2024</p>
+    </footer>
+</body>
+</html>

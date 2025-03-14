@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ความหมายของ while loop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #e3f2fd, #bbdefb, #90caf9);
+            color: #0d47a1;
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(3, 137, 209, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: #1976d2;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.5em;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .hamburger-menu div {
+            width: 30px;
+            height: 4px;
+            background: #0d47a1;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 55%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 999;
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-overlay.active {
+            transform: translateX(0);
+        }
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .menu-links a {
+            color: #0d47a1;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .menu-links a:hover {
+            color: #1976d2;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 1000px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1565c0;
+            margin-bottom: 15px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        p, ul, code {
+            margin: 10px 0;
+            color: #1a237e;
+            font-size: 1.2em;
+        }
+
+        .highlight {
+            background: #e3f2fd;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f1f8e9;
+            border: 1px solid #c5e1a5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2196f3;
+            color: #ffffff;
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Snowflake animation */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: snowflakes 10s linear infinite;
+        }
+
+        @keyframes snowflakes {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Generate random snowflakes */
+        .snowflake:nth-child(odd) {
+            animation-duration: 12s;
+        }
+
+        .snowflake:nth-child(even) {
+            animation-duration: 15s;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="color: #ffffff;">ความหมายของ While Loop</h1>
+        <p style="color: #ffffff;">พื้นฐานและการใช้งาน While Loop ในภาษาซี</p>
+    </header>
+
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="menu-overlay" id="menu">
+        <div class="menu-links">
+            <a href="index.html">หน้าแรก</a>
+            <a href="mainc.html">ความหมายของ While Loop</a>
+            <a href="lesson.html">การทำงานของลูป While</a>
+            <a href="lesson2.html">บทเรียนที่ 2</a>
+            <a href="contactc.html">ติดต่อเรา</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>While Loop คืออะไร?</h2>
+            <p>While Loop เป็นโครงสร้างควบคุมการทำงานแบบวนซ้ำในภาษาซี โดยจะทำงานซ้ำตามเงื่อนไขที่กำหนดจนกว่าเงื่อนไขจะเป็นเท็จ (false)</p>
+
+            <div class="highlight">
+                <p><strong>โครงสร้าง:</strong></p>
+                <code>
+while (เงื่อนไข) {
+    // คำสั่งที่ต้องการให้ทำซ้ำ
+}
+                </code>
+            </div>
+
+            <h3>ตัวอย่างการใช้งาน While Loop</h3>
+            <div class="example">
+                <code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int i = 1;
+    while (i <= 5) {
+        printf("รอบที่ %d\n", i);
+        i++;
+    }
+    return 0;
+}
+                </code>
+                <p>ผลลัพธ์:</p>
+                <p class="highlight">รอบที่ 1<br>รอบที่ 2<br>รอบที่ 3<br>รอบที่ 4<br>รอบที่ 5</p>
+            </div>
+
+            <h3>ประโยชน์ของ While Loop</h3>
+            <ul>
+                <li>ช่วยให้เขียนโค้ดที่ทำงานซ้ำได้อย่างง่ายดาย</li>
+                <li>เหมาะสำหรับสถานการณ์ที่ไม่สามารถคาดเดาจำนวนรอบล่วงหน้าได้</li>
+                <li>ปรับปรุงประสิทธิภาพการทำงานของโปรแกรม</li>
+            </ul>
+
+            <h3>ข้อควรระวัง</h3>
+            <p>ควรตรวจสอบให้แน่ใจว่าเงื่อนไขใน While Loop จะเปลี่ยนแปลงได้ เพื่อหลีกเลี่ยงการเกิดลูปที่ไม่มีวันสิ้นสุด (infinite loop)</p>
+
+            <div class="image-container">
+                <img src="while-flowchart.png" alt="ตัวอย่าง While Loop">
+            </div>
+
+            <h3>ตัวอย่างเพิ่มเติม</h3>
+            <div class="example">
+                <p>การคำนวณผลรวมของตัวเลข 1 ถึง 10:</p>
+                <code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int sum = 0, i = 1;
+    while (i <= 10) {
+        sum += i;
+        i++;
+    }
+    printf("ผลรวมคือ %d\n", sum);
+    return 0;
+}
+                </code>
+                <p>ผลลัพธ์:</p>
+                <p class="highlight">ผลรวมคือ 55</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>เว็บไซต์นี้จัดทำเพื่อการศึกษา &copy; 2024</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+
+        // Snowfall Effect
+        const snowContainer = document.createElement('div');
+        document.body.appendChild(snowContainer);
+
+        for (let i = 0; i < 50; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;  // Random duration
+            snowflake.textContent = '❄';
+            snowContainer.appendChild(snowflake);
+        }
+    </script>
+</body>
+</html>
